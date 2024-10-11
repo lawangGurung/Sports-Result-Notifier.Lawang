@@ -1,5 +1,3 @@
-using System;
-
 namespace Sports_Result_Notifier.Lawang.Models;
 
 public class GameResult

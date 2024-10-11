@@ -1,5 +1,3 @@
-using System;
-using System.Text;
 using Sports_Result_Notifier.Lawang.Models;
 
 namespace Sports_Result_Notifier.Lawang;

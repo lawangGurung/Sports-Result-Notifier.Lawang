@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using HtmlAgilityPack;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sports_Result_Notifier.Lawang;
 
