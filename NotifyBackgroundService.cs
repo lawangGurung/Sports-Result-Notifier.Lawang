@@ -11,7 +11,7 @@ public class NotifyBackgroundService : BackgroundService
     private MailSender _emailSender;
     private ILogger<NotifyBackgroundService> _logger;
 
-    // Change FromHours to FromSeconds for testins purposes
+    // Change FromHours to FromSeconds for testing purposes
     private TimeSpan _timeSpan = TimeSpan.FromHours(24);
 
     // Add new recievers email addresses
@@ -30,12 +30,12 @@ public class NotifyBackgroundService : BackgroundService
             try
             {
                 // scrapping the result from this date
-                var date = new DateTime(2022, 04, 09);
+                var date = DateTime.Now;
                 _web.SetDateUrl(date);
 
                 var title = _web.GetTitle();
 
-                var result = _web.GetGameResult();
+                var result = _web.GetAllResults();
                 var message = EmailBuilder.BuildEmail(result, title);
                 
                 foreach (var email in recievers)

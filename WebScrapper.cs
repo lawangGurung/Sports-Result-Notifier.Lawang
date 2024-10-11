@@ -30,7 +30,7 @@ public class WebScrapper
         {
             _doc = new HtmlWeb().Load(_url);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.Error.WriteLine(ex.Message);
         }
@@ -42,17 +42,42 @@ public class WebScrapper
         return _doc.GetElementbyId("content").SelectSingleNode("//h1").InnerText;
     }
 
-    public GameResult? GetGameResult()
+    public List<GameResult> GetAllResults()
     {
-        if (_doc == null) return null;
+        List<GameResult> allGames = new();
+        try
+        {
+            List<HtmlNode>? allGamesNode = _doc?.DocumentNode.SelectNodes("//*[@id=\"content\"]/div[3]/div[position()>0]").ToList();
 
+
+            int i = 0;
+            while (allGamesNode?.Count() > i)
+            {
+                var result = GetGameResult(allGamesNode[i]);
+                if (result != null)
+                {
+                    allGames.Add(result);
+                }
+                i++;
+            }
+
+            return allGames;
+        }
+        catch(ArgumentNullException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        return allGames;
+    }
+    private GameResult? GetGameResult(HtmlNode node)
+    {
         var gameResult = new GameResult();
         List<HtmlNode>? tableNodes = null;
         try
         {
-            tableNodes = _doc.DocumentNode.SelectNodes("//*[@id=\"content\"]/div[3]/div/table[position()>0]").ToList();
+            tableNodes = node.SelectNodes(".//table[position()>0]").ToList();
         }
-        catch(ArgumentNullException ex)
+        catch (ArgumentNullException ex)
         {
             Console.Error.WriteLine(ex.Message);
         }

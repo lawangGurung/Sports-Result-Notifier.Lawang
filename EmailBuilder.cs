@@ -6,7 +6,7 @@ namespace Sports_Result_Notifier.Lawang;
 
 public static class EmailBuilder
 {
-    public static string BuildEmail(GameResult? gameResult, string title)
+    public static string BuildEmail(List<GameResult>? gameResult, string title)
     {
         var content = (gameResult == null) ? "NO GAME PLAYED TODAY" : title;
         var tableData = (gameResult != null) ? SummaryTable(gameResult) : ""; 
@@ -20,6 +20,7 @@ public static class EmailBuilder
                             {{
                                 font-size: 2 rem;
                                 margin: 1 rem;
+                                margin-bottom: 1 rem;
                                 padding: 1 rem;
                                 border: 1px solid black;
                             }}
@@ -46,14 +47,13 @@ public static class EmailBuilder
         return htmlFormat;
     }
 
-    private static string SummaryTable(GameResult result)
+    private static string SummaryTable(List<GameResult> results)
     {
         var cols = new string[] { "Teams", "1", "2", "3", "4", "Total Scores"};
 
         string tableCols = string.Join("", cols.Select(cols => $"<th>{cols}</th>"));
 
-        return 
-            @$"
+        string resultTable = string.Join("", results.Select(result =>  @$"
             <table>
                 <thead>
                     {tableCols}
@@ -63,7 +63,10 @@ public static class EmailBuilder
                     {DataTable(result.Winner)}
                 </tbody>
             </table> 
-            ";
+        "));
+        
+       return resultTable;     
+            
     }
 
     private static string DataTable(Team team)
