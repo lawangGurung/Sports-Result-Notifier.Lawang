@@ -1,28 +1,15 @@
 ﻿using System.Diagnostics;
 using HtmlAgilityPack;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Sports_Result_Notifier.Lawang;
 
-DotNetEnv.Env.Load();
+var host = Host.CreateDefaultBuilder(args).ConfigureServices((hostcontext, services) => {
+    services.AddHostedService<NotifyBackgroundService>();
+}).Build();
 
-var scrapped = new WebScrapper("https://www.basketball-reference.com/boxscores/");
-var title = scrapped.GetTitle();
-
-var result = scrapped.GetGameResult();
+await host.RunAsync();
 
 
-// List<HtmlNode> nodes = doc.DocumentNode.SelectNodes("//*[@id=\"content\"]/div[3]/div/table[position()<3]").ToList();
 
-// foreach(var node in nodes)
-// {
-//     var looser = node.SelectSingleNode(".//tr[1]/td[1]/a").InnerText;
-//     int looserScore = int.Parse(node.SelectSingleNode(".//tr[1]/td[2]").InnerText); 
-//     var winner = node.SelectSingleNode(".//tr[2]/td[1]/a").InnerText;
-
-//     Console.WriteLine($"looser: {looser}");
-//     Console.WriteLine($"Score: {looserScore}");
-
-//     Console.WriteLine($"winner: {winner}");
-// }
-
-// Console.WriteLine(nodes.Count());
 
