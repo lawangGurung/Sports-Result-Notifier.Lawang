@@ -24,18 +24,20 @@ To deploy this project Create .env file and inside .env file replace "YOUR_EMAIL
 
 For testing Purposes user can change the value present inside the NotifyBackgroundSevice class.
 
-- [image]
+- ![Screenshot from 2024-10-11 17-33-30](https://github.com/user-attachments/assets/2b17938b-797c-412d-8932-f45d08e97e1b)
+
 
 - Change the "_timeSpan" value to  (`private TimeSpan _timeSpan = TimeSpan.FromSeconds(10)`)  so that the program could send email every 10 seconds instead of once every 24 hour 
 
-- [image]
+- ![Screenshot from 2024-10-11 17-34-31](https://github.com/user-attachments/assets/245c0c31-cfcc-4009-9349-057690b6cbc5)
+
 - You can change the value to the specific date for which you want the basketball result.
 
  ## Screen shots:
 
 
+* ![Screenshot from 2024-10-11 17-47-32](https://github.com/user-attachments/assets/a7808293-5f37-4574-9581-15cdbf7974dc)
 
-* ![App Screenshot]
 
 - Data is sent to user in the above format via gmail server.
 
